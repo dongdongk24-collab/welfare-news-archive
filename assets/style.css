@@ -107,12 +107,16 @@ h1 {
   font-weight: 800;
 }
 
+.calendar-field {
+  position: relative;
+}
+
 .text-input {
   width: 100%;
   min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 10px 42px 10px 12px;
   color: var(--ink);
   font: inherit;
 }
@@ -120,6 +124,100 @@ h1 {
 .text-input:focus {
   border-color: var(--accent);
   outline: 3px solid var(--soft);
+}
+
+.calendar-toggle {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #f3f5f1;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.calendar-popover {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(320px, calc(100vw - 48px));
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 16px 36px rgba(13, 34, 31, 0.16);
+  padding: 12px;
+}
+
+.calendar-head {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.calendar-title {
+  text-align: center;
+  font-weight: 900;
+}
+
+.calendar-nav,
+.calendar-day {
+  min-height: 36px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.calendar-nav:hover,
+.calendar-day:hover {
+  background: var(--soft);
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-weekdays span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.calendar-day {
+  font-size: 0.94rem;
+  text-align: center;
+}
+
+.calendar-day.outside {
+  color: #b7bfc3;
+}
+
+.calendar-day.available {
+  background: var(--soft);
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
+.calendar-day.selected {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.calendar-day.unavailable {
+  color: #9aa3a7;
 }
 
 .action-button {
@@ -280,6 +378,10 @@ h1 {
   .search-row,
   .search-row.single {
     grid-template-columns: 1fr;
+  }
+
+  .calendar-popover {
+    width: 100%;
   }
 
   .action-button {
