@@ -15,6 +15,12 @@ const archiveEntries = [
 
 const normalize = (value) => value.toString().trim().toLowerCase().replace(/\s+/g, " ");
 const compactDate = (value) => value.replace(/[^0-9]/g, "");
+const pad = (value) => value.toString().padStart(2, "0");
+const formatDate = (date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+const formatKoreanDate = (value) => {
+  const [year, month, day] = value.split("-").map(Number);
+  return `${year}년 ${month}월 ${day}일`;
+};
 
 function renderArchiveList(entries) {
   const list = document.querySelector("[data-archive-list]");
@@ -32,7 +38,13 @@ function bindDateSearch() {
   const input = document.querySelector("[data-date-search]");
   const message = document.querySelector("[data-date-message]");
   const button = document.querySelector("[data-date-button]");
-  if (!input || !message || !button) return;
+  const toggle = document.querySelector("[data-calendar-toggle]");
+  const calendar = document.querySelector("[data-calendar]");
+  if (!input || !message || !button || !toggle || !calendar) return;
+
+  const availableDates = new Set(archiveEntries.map((entry) => entry.date));
+  let selectedDate = archiveEntries[0]?.date || formatDate(new Date());
+  let viewDate = new Date(`${selectedDate}T00:00:00`);
 
   const findEntry = () => {
     const raw = input.value;
@@ -45,6 +57,25 @@ function bindDateSearch() {
     });
   };
 
+  const syncMessage = () => {
+    const entry = findEntry();
+    message.textContent = entry ? `${entry.label} 페이지가 있습니다.` : "아직 해당 날짜의 아카이브가 없습니다.";
+  };
+
+  const openCalendar = () => {
+    calendar.hidden = false;
+    renderCalendar();
+  };
+
+  const closeCalendar = () => {
+    calendar.hidden = true;
+  };
+
+  const toggleCalendar = () => {
+    if (calendar.hidden) openCalendar();
+    else closeCalendar();
+  };
+
   const goToDate = () => {
     const entry = findEntry();
     if (entry) {
@@ -55,16 +86,78 @@ function bindDateSearch() {
     message.textContent = "아직 해당 날짜의 아카이브가 없습니다.";
   };
 
-  input.addEventListener("input", () => {
-    const entry = findEntry();
-    message.textContent = entry ? `${entry.label} 페이지가 있습니다.` : "예: 2026-06-03 또는 2026년 6월 3일";
-  });
+  function renderCalendar() {
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    const first = new Date(year, month, 1);
+    const start = new Date(year, month, 1 - first.getDay());
+    const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") goToDate();
-  });
+    const days = Array.from({ length: 42 }, (_, index) => {
+      const day = new Date(start);
+      day.setDate(start.getDate() + index);
+      const value = formatDate(day);
+      const outside = day.getMonth() !== month;
+      const available = availableDates.has(value);
+      const selected = value === selectedDate;
+      const className = [
+        "calendar-day",
+        outside ? "outside" : "",
+        available ? "available" : "unavailable",
+        selected ? "selected" : ""
+      ].filter(Boolean).join(" ");
 
+      return `<button class="${className}" type="button" data-calendar-date="${value}">${day.getDate()}</button>`;
+    }).join("");
+
+    calendar.innerHTML = `
+      <div class="calendar-head">
+        <button class="calendar-nav" type="button" aria-label="이전 달" data-calendar-prev>‹</button>
+        <div class="calendar-title">${year}년 ${month + 1}월</div>
+        <button class="calendar-nav" type="button" aria-label="다음 달" data-calendar-next>›</button>
+      </div>
+      <div class="calendar-weekdays">${weekdays.map((day) => `<span>${day}</span>`).join("")}</div>
+      <div class="calendar-grid">${days}</div>
+    `;
+  }
+
+  input.value = selectedDate;
+  syncMessage();
+
+  input.addEventListener("click", openCalendar);
+  input.addEventListener("focus", openCalendar);
+  toggle.addEventListener("click", toggleCalendar);
   button.addEventListener("click", goToDate);
+
+  calendar.addEventListener("click", (event) => {
+    const previous = event.target.closest("[data-calendar-prev]");
+    const next = event.target.closest("[data-calendar-next]");
+    const day = event.target.closest("[data-calendar-date]");
+
+    if (previous) {
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+      renderCalendar();
+      return;
+    }
+
+    if (next) {
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+      renderCalendar();
+      return;
+    }
+
+    if (day) {
+      selectedDate = day.dataset.calendarDate;
+      input.value = selectedDate;
+      viewDate = new Date(`${selectedDate}T00:00:00`);
+      syncMessage();
+      renderCalendar();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".calendar-field")) closeCalendar();
+  });
 }
 
 function resultTemplate(item) {
