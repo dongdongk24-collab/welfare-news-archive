@@ -68,7 +68,8 @@ function bindDateSearch() {
     calendar.hidden = true;
   };
 
-  const toggleCalendar = () => {
+  const toggleCalendar = (event) => {
+    event.stopPropagation();
     if (calendar.hidden) openCalendar();
     else closeCalendar();
   };
@@ -121,14 +122,13 @@ function bindDateSearch() {
   input.value = selectedDate;
   syncMessage();
 
-  input.addEventListener("click", openCalendar);
+  input.addEventListener("click", (event) => {
+    event.stopPropagation();
+    openCalendar();
+  });
   input.addEventListener("focus", openCalendar);
   toggle.addEventListener("click", toggleCalendar);
   button.addEventListener("click", goToDate);
-
-  field.addEventListener("click", (event) => {
-    event.stopPropagation();
-  }, true);
 
   calendar.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -137,12 +137,14 @@ function bindDateSearch() {
     const day = event.target.closest("[data-calendar-date]");
 
     if (previous) {
+      event.preventDefault();
       viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
       renderCalendar();
       return;
     }
 
     if (next) {
+      event.preventDefault();
       viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
       renderCalendar();
       return;
@@ -157,7 +159,13 @@ function bindDateSearch() {
     }
   });
 
-  document.addEventListener("click", closeCalendar);
+  field.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!field.contains(event.target)) closeCalendar();
+  });
 }
 
 function resultTemplate(item) {
