@@ -307,10 +307,35 @@ h1 {
 }
 
 .back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
   margin-bottom: 18px;
-  font-weight: 700;
+  padding: 0 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 800;
   text-decoration: none;
+}
+
+.back-link::before {
+  content: "홈으로";
+}
+
+.back-link::after {
+  content: "";
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.55);
+  order: -1;
+}
+
+.back-link:hover {
+  background: var(--accent-strong);
+  color: #ffffff;
 }
 
 .topic {
