@@ -17,10 +17,6 @@ const normalize = (value) => value.toString().trim().toLowerCase().replace(/\s+/
 const compactDate = (value) => value.replace(/[^0-9]/g, "");
 const pad = (value) => value.toString().padStart(2, "0");
 const formatDate = (date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-const formatKoreanDate = (value) => {
-  const [year, month, day] = value.split("-").map(Number);
-  return `${year}년 ${month}월 ${day}일`;
-};
 
 function renderArchiveList(entries) {
   const list = document.querySelector("[data-archive-list]");
@@ -40,7 +36,8 @@ function bindDateSearch() {
   const button = document.querySelector("[data-date-button]");
   const toggle = document.querySelector("[data-calendar-toggle]");
   const calendar = document.querySelector("[data-calendar]");
-  if (!input || !message || !button || !toggle || !calendar) return;
+  const field = document.querySelector(".calendar-field");
+  if (!input || !message || !button || !toggle || !calendar || !field) return;
 
   const availableDates = new Set(archiveEntries.map((entry) => entry.date));
   let selectedDate = archiveEntries[0]?.date || formatDate(new Date());
@@ -129,7 +126,12 @@ function bindDateSearch() {
   toggle.addEventListener("click", toggleCalendar);
   button.addEventListener("click", goToDate);
 
+  field.addEventListener("click", (event) => {
+    event.stopPropagation();
+  }, true);
+
   calendar.addEventListener("click", (event) => {
+    event.stopPropagation();
     const previous = event.target.closest("[data-calendar-prev]");
     const next = event.target.closest("[data-calendar-next]");
     const day = event.target.closest("[data-calendar-date]");
@@ -155,9 +157,7 @@ function bindDateSearch() {
     }
   });
 
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".calendar-field")) closeCalendar();
-  });
+  document.addEventListener("click", closeCalendar);
 }
 
 function resultTemplate(item) {
