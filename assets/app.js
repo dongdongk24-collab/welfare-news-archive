@@ -181,7 +181,7 @@ function resultTemplate(item) {
       <div class="result-meta">${item.dateLabel} · ${item.section} · <span>${stars}</span></div>
       <h3><a href="${item.page}">${item.title}</a></h3>
       <p>${item.summary}</p>
-      <p class="source"><a href="${item.url}">원문 보기</a></p>
+      <p class="source"><a href="${item.url}" target="_blank" rel="noopener noreferrer">원문 보기</a></p>
     </article>
   `;
 }
