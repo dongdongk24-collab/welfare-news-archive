@@ -59,5 +59,17 @@
     <section class="archive-list" aria-label="뉴스 아카이브 날짜 목록" data-archive-list></section>
   </main>
   <script src="assets/app.js?v=20260605-trigger2"></script>
+  <script>
+    (() => {
+      const button = document.querySelector("[data-trigger-update]");
+      if (!button) return;
+      const observer = new MutationObserver(() => {
+        if (button.textContent.trim() === "수집 요청 완료") {
+          button.textContent = "오늘 자료 수집 실행";
+        }
+      });
+      observer.observe(button, { childList: true, characterData: true, subtree: true });
+    })();
+  </script>
 </body>
 </html>
