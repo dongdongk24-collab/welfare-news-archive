@@ -18,8 +18,12 @@
   <main class="layout">
     <section class="intro" aria-labelledby="refresh-title">
       <h2 id="refresh-title">최신 상태 확인</h2>
-      <p>매일 오전 8시에 RSS 기반 자동 수집 결과가 저장됩니다. 목록이 예전 상태로 보이면 새로고침해 주세요.</p>
-      <button class="action-button" type="button" onclick="window.location.reload()">저장된 최신 데이터 새로고침</button>
+      <p>매일 오전 8시에 RSS 기반 자동 수집 결과가 저장됩니다. 자동 수집이 안 됐을 때는 직접 실행할 수 있습니다.</p>
+      <div class="button-row">
+        <button class="action-button" type="button" data-trigger-update>오늘 자료 수집 실행</button>
+        <button class="secondary-button" type="button" onclick="window.location.reload()">저장된 최신 데이터 새로고침</button>
+      </div>
+      <p class="helper-text" data-trigger-message>수집 실행 후 보통 1~3분 뒤 새로고침하면 새 날짜가 보입니다.</p>
     </section>
 
     <section class="intro" aria-labelledby="date-search-title">
@@ -55,6 +59,6 @@
 
     <section class="archive-list" aria-label="뉴스 아카이브 날짜 목록" data-archive-list></section>
   </main>
-  <script src="assets/app.js?v=20260605-news1"></script>
+  <script src="assets/app.js?v=20260605-trigger1"></script>
 </body>
 </html>
