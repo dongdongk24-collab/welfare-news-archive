@@ -1,5 +1,11 @@
 const archiveEntries = [
   {
+    date: "2026-06-04",
+    label: "2026년 6월 4일",
+    href: "posts/2026-06-04.html",
+    summary: "복지 전반 3건, 서울시 3건, 광진구 확인된 뉴스 없음"
+  },
+  {
     date: "2026-06-03",
     label: "2026년 6월 3일",
     href: "posts/2026-06-03.html",
@@ -180,6 +186,36 @@ function resultTemplate(item) {
   `;
 }
 
+function flattenNewsData(newsData, entry) {
+  return (newsData.sections || []).flatMap((section) => {
+    return (section.items || []).map((item) => ({
+      ...item,
+      date: item.date || newsData.date,
+      dateLabel: item.dateLabel || entry.label,
+      page: item.page || entry.href,
+      section: item.section || section.name
+    }));
+  });
+}
+
+async function loadSearchIndex() {
+  const dynamicItems = await Promise.all(archiveEntries.map(async (entry) => {
+    try {
+      const response = await fetch(`data/news-${entry.date}.json`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Missing ${entry.date}`);
+      return flattenNewsData(await response.json(), entry);
+    } catch (error) {
+      return [];
+    }
+  }));
+
+  const flattened = dynamicItems.flat();
+  if (flattened.length) return flattened;
+
+  const response = await fetch("data/search-index.json", { cache: "no-store" });
+  return response.json();
+}
+
 async function bindKeywordSearch() {
   const input = document.querySelector("[data-keyword-search]");
   const results = document.querySelector("[data-search-results]");
@@ -188,8 +224,7 @@ async function bindKeywordSearch() {
 
   let index = [];
   try {
-    const response = await fetch("data/search-index.json", { cache: "no-store" });
-    index = await response.json();
+    index = await loadSearchIndex();
   } catch (error) {
     results.innerHTML = `<p class="empty">검색 데이터를 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.</p>`;
     return;
