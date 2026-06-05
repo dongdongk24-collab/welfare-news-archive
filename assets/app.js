@@ -36,6 +36,40 @@ function renderArchiveList(entries) {
   `).join("");
 }
 
+function bindManualUpdate() {
+  const button = document.querySelector("[data-trigger-update]");
+  const message = document.querySelector("[data-trigger-message]");
+  if (!button || !message) return;
+
+  button.addEventListener("click", async () => {
+    const pin = window.prompt("수집 실행 비밀번호가 설정되어 있으면 입력해 주세요. 없으면 빈칸으로 확인을 누르세요.") || "";
+    button.disabled = true;
+    button.textContent = "수집 실행 요청 중";
+    message.textContent = "GitHub Actions에 뉴스 수집 작업을 요청하고 있습니다.";
+
+    try {
+      const response = await fetch("/api/trigger-update", {
+        method: "POST",
+        headers: pin ? { "x-update-pin": pin } : {},
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || "수집 실행 요청에 실패했습니다.");
+      }
+      message.textContent = data.message || "뉴스 수집 작업을 시작했습니다. 1~3분 뒤 새로고침해 주세요.";
+      button.textContent = "수집 요청 완료";
+    } catch (error) {
+      message.textContent = error.message || "수집 실행 요청에 실패했습니다. Vercel 환경변수를 확인해 주세요.";
+      button.textContent = "오늘 자료 수집 실행";
+    } finally {
+      setTimeout(() => {
+        button.disabled = false;
+        if (button.textContent === "수집 요청 완료") button.textContent = "오늘 자료 수집 실행";
+      }, 3000);
+    }
+  });
+}
+
 function bindDateSearch() {
   const input = document.querySelector("[data-date-search]");
   const message = document.querySelector("[data-date-message]");
@@ -261,5 +295,6 @@ async function bindKeywordSearch() {
 }
 
 renderArchiveList(archiveEntries);
+bindManualUpdate();
 bindDateSearch();
 bindKeywordSearch();
