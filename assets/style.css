@@ -39,25 +39,29 @@ a { color: var(--accent-strong); }
 .detail-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 22px;
 }
 
 .nav-button {
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--accent-strong);
   border-radius: 8px;
+  background: var(--accent);
   color: #ffffff;
-  font-weight: 800;
+  box-shadow: 0 3px 10px rgba(11, 79, 71, 0.18);
+  font-weight: 900;
   text-decoration: none;
 }
 
-.nav-button:hover {
-  background: rgba(255, 255, 255, 0.12);
+.nav-button:hover,
+.nav-button:focus-visible {
+  background: var(--accent-strong);
   color: #ffffff;
+  outline: 3px solid rgba(19, 111, 99, 0.22);
 }
 
 .eyebrow {
