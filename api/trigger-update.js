@@ -61,6 +61,8 @@ module.exports = async function handler(req, res) {
 
   return json(res, 202, {
     ok: true,
-    message: "뉴스 수집 작업을 시작했습니다. 보통 1~3분 뒤 새로고침하면 반영됩니다.",
+    message: targetDate
+      ? `${targetDate} 뉴스 수집 작업을 시작했습니다. 보통 1~3분 뒤 새로고침하면 반영됩니다.`
+      : "밀린 날짜의 뉴스 수집 작업을 시작했습니다. 저장되지 않은 날짜를 어제까지 순서대로 만들며, 보통 1~3분 뒤 새로고침하면 반영됩니다.",
   });
 };
