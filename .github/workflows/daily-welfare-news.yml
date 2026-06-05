@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       target_date:
-        description: "Target date in YYYY-MM-DD, defaults to yesterday KST"
+        description: "Optional single date in YYYY-MM-DD. Leave empty to collect all missing dates through yesterday KST."
         required: false
         type: string
 
@@ -26,10 +26,63 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Determine target dates
+        id: dates
+        env:
+          TARGET_DATE: ${{ github.event.inputs.target_date }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+
+          kst = timezone(timedelta(hours=9))
+          explicit = (os.environ.get("TARGET_DATE") or "").strip()
+          end = datetime.now(kst).date() - timedelta(days=1)
+
+          if explicit:
+              dates = [explicit]
+          else:
+              existing = set()
+              for path in Path("data").glob("news-*.json"):
+                  match = re.fullmatch(r"news-(\d{4}-\d{2}-\d{2})\.json", path.name)
+                  if match:
+                      try:
+                          existing.add(datetime.strptime(match.group(1), "%Y-%m-%d").date())
+                      except ValueError:
+                          pass
+
+              if existing:
+                  start = min(existing)
+                  dates = []
+                  current = start
+                  while current <= end:
+                      if current not in existing:
+                          dates.append(current.isoformat())
+                      current += timedelta(days=1)
+              else:
+                  dates = [end.isoformat()]
+
+          value = " ".join(dates)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"dates={value}\n")
+              output.write(f"count={len(dates)}\n")
+          print(f"Target dates: {value or 'none'}")
+          PY
+
       - name: Update welfare news archive from RSS feeds
         env:
-          TARGET_DATE: ${{ inputs.target_date }}
-        run: python scripts/update_welfare_news.py
+          TARGET_DATES: ${{ steps.dates.outputs.dates }}
+        run: |
+          if [ -z "$TARGET_DATES" ]; then
+            echo "No missing welfare news dates."
+            exit 0
+          fi
+          for target_date in $TARGET_DATES; do
+            echo "Updating welfare news for $target_date"
+            TARGET_DATE="$target_date" python scripts/update_welfare_news.py
+          done
 
       - name: Commit changes
         run: |
