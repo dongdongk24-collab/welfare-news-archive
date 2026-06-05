@@ -25,6 +25,8 @@ const archiveEntries = [
   }
 ];
 
+archiveEntries.sort((a, b) => b.date.localeCompare(a.date));
+
 const normalize = (value) => value.toString().trim().toLowerCase().replace(/\s+/g, " ");
 const compactDate = (value) => value.replace(/[^0-9]/g, "");
 const pad = (value) => value.toString().padStart(2, "0");
