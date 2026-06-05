@@ -100,6 +100,13 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
 .topic, .news-section { margin-bottom: 18px; }
 .intro h2, .topic h2, .news-section h2 { margin: 0 0 8px; }
 
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
 .search-row {
   display: grid;
   grid-template-columns: minmax(80px, 120px) minmax(0, 1fr) auto;
@@ -180,19 +187,32 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
 .calendar-day.selected { background: var(--accent); color: #ffffff; font-weight: 900; }
 .calendar-day.unavailable { color: #9aa3a7; }
 
-.action-button {
+.action-button,
+.secondary-button {
   min-height: 44px;
-  border: 0;
   border-radius: 8px;
   padding: 0 18px;
-  background: var(--accent);
-  color: #ffffff;
   font: inherit;
   font-weight: 800;
   cursor: pointer;
 }
 
+.action-button {
+  border: 0;
+  background: var(--accent);
+  color: #ffffff;
+}
+
 .action-button:hover { background: var(--accent-strong); }
+.action-button:disabled { opacity: 0.72; cursor: wait; }
+
+.secondary-button {
+  border: 1px solid var(--accent);
+  background: #ffffff;
+  color: var(--accent-strong);
+}
+
+.secondary-button:hover { background: var(--soft); }
 .helper-text { margin: 10px 0 0; color: var(--muted); font-size: 0.95rem; }
 .search-results { display: grid; gap: 12px; margin-top: 16px; }
 .result-item { border-top: 1px solid var(--line); padding-top: 14px; }
@@ -248,5 +268,5 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
   .intro, .topic, .news-section, .note { padding: 18px; }
   .search-row, .search-row.single { grid-template-columns: 1fr; }
   .calendar-popover { width: 100%; }
-  .action-button { width: 100%; }
+  .action-button, .secondary-button { width: 100%; }
 }
