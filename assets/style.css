@@ -48,20 +48,20 @@ a { color: var(--accent-strong); }
   align-items: center;
   min-height: 42px;
   padding: 0 16px;
-  border: 1px solid var(--accent-strong);
+  border: 1px solid #0b5f56;
   border-radius: 8px;
-  background: var(--accent);
+  background: #13796c;
   color: #ffffff;
-  box-shadow: 0 3px 10px rgba(11, 79, 71, 0.18);
+  box-shadow: 0 3px 10px rgba(11, 79, 71, 0.2);
   font-weight: 900;
   text-decoration: none;
 }
 
 .nav-button:hover,
 .nav-button:focus-visible {
-  background: var(--accent-strong);
+  background: #0b4f47;
   color: #ffffff;
-  outline: 3px solid rgba(19, 111, 99, 0.22);
+  outline: 3px solid rgba(255, 255, 255, 0.28);
 }
 
 .eyebrow {
@@ -88,6 +88,7 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
 
 .intro,
 .topic,
+.news-section,
 .note {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -96,7 +97,8 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
 }
 
 .intro { margin-bottom: 18px; }
-.intro h2, .topic h2 { margin: 0 0 8px; }
+.topic, .news-section { margin-bottom: 18px; }
+.intro h2, .topic h2, .news-section h2 { margin: 0 0 8px; }
 
 .search-row {
   display: grid;
@@ -231,20 +233,19 @@ h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
 }
 
 .back-link:hover { background: var(--accent-strong); color: #ffffff; }
-.topic { margin-bottom: 18px; }
 .news-item { padding: 18px 0; border-top: 1px solid var(--line); }
 .news-item:first-of-type { border-top: 0; }
-.rating { color: var(--warn); font-weight: 800; }
+.rating, .stars { color: var(--warn); font-weight: 800; }
 .news-item h3 { margin: 6px 0 8px; font-size: 1.2rem; }
 .news-item ul { margin: 8px 0; padding-left: 20px; }
-.think { margin-top: 12px; padding: 12px 14px; background: var(--soft); border-radius: 8px; }
-.think strong { display: block; margin-bottom: 4px; }
+.think, .insight { margin-top: 12px; padding: 12px 14px; background: var(--soft); border-radius: 8px; }
+.think strong, .insight strong { display: block; margin-bottom: 4px; }
 .source { margin-bottom: 0; font-size: 0.94rem; }
 
 @media (max-width: 640px) {
   .site-header { padding: 36px 18px 32px; }
   .site-header > div, .layout, .article-layout { width: min(100% - 24px, 1080px); }
-  .intro, .topic, .note { padding: 18px; }
+  .intro, .topic, .news-section, .note { padding: 18px; }
   .search-row, .search-row.single { grid-template-columns: 1fr; }
   .calendar-popover { width: 100%; }
   .action-button { width: 100%; }
