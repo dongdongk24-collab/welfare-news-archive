@@ -1,0 +1,29 @@
+{
+  "date": "2026-08-09",
+  "title": "2026년 8월 9일 복지 뉴스",
+  "generatedAt": "2026-08-10T08:26:44+09:00",
+  "collectionMode": "rss-no-ai",
+  "sections": [
+    {
+      "name": "복지 전반에 관련된 주요 뉴스",
+      "items": [],
+      "note": "2026-08-09 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    },
+    {
+      "name": "서울시 복지 정책 및 복지 현장 관련 뉴스",
+      "items": [],
+      "note": "2026-08-09 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    },
+    {
+      "name": "광진구 지역 복지 관련 뉴스",
+      "items": [],
+      "note": "2026-08-09 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    }
+  ],
+  "excluded": [
+    "대한민국 정책브리핑 보도자료 수집 실패: HTTP Error 404: Not Found",
+    "서울시 보도자료 수집 실패: <urlopen error timed out>",
+    "내 손안에 서울 복지 RSS 수집 실패: <urlopen error timed out>",
+    "광진구 보도자료 수집 실패: <urlopen error timed out>"
+  ]
+}
