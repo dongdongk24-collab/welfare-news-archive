@@ -523,9 +523,24 @@ function renderArchiveList(entries) {
     return groups;
   }, new Map());
 
-  list.innerHTML = Array.from(entriesByMonth.entries()).map(([monthKey, monthEntries], index) => {
+  const monthGroups = Array.from(entriesByMonth.entries());
+  const newestYear = Number(monthGroups[0]?.[0].slice(0, 4));
+
+  const monthButtons = monthGroups.map(([monthKey, monthEntries], index) => {
     const [year, month] = monthKey.split("-").map(Number);
-    const monthLabel = `${year}년 ${month}월`;
+    const monthLabel = year === newestYear ? `${month}월` : `${year}년 ${month}월`;
+    return `
+      <button class="archive-month-tab" type="button" role="tab"
+        id="archive-tab-${monthKey}" aria-controls="archive-panel-${monthKey}"
+        aria-selected="${index === 0}" tabindex="${index === 0 ? "0" : "-1"}"
+        data-archive-month="${monthKey}">
+        <span>${monthLabel}</span>
+        <small>${monthEntries.length}일</small>
+      </button>
+    `;
+  }).join("");
+
+  const monthPanels = monthGroups.map(([monthKey, monthEntries], index) => {
     const cards = monthEntries.map((entry) => `
       <a class="archive-link" href="${entry.href}">
         <span class="date">${entry.label}</span>
@@ -534,15 +549,42 @@ function renderArchiveList(entries) {
     `).join("");
 
     return `
-      <details class="archive-month"${index === 0 ? " open" : ""}>
-        <summary class="archive-month-header">
-          <span class="archive-month-title">${monthLabel}</span>
-          <span class="archive-month-count">${monthEntries.length}일</span>
-        </summary>
-        <div class="archive-month-entries">${cards}</div>
-      </details>
+      <div class="archive-month-panel" role="tabpanel"
+        id="archive-panel-${monthKey}" aria-labelledby="archive-tab-${monthKey}"
+        ${index === 0 ? "" : "hidden"}>${cards}</div>
     `;
   }).join("");
+
+  list.innerHTML = `
+    <div class="archive-month-tabs" role="tablist" aria-label="월 선택">${monthButtons}</div>
+    <div class="archive-month-panels">${monthPanels}</div>
+  `;
+
+  const tabs = Array.from(list.querySelectorAll("[data-archive-month]"));
+  const selectMonth = (selectedTab) => {
+    tabs.forEach((tab) => {
+      const selected = tab === selectedTab;
+      tab.setAttribute("aria-selected", selected.toString());
+      tab.tabIndex = selected ? 0 : -1;
+      const panel = document.getElementById(`archive-panel-${tab.dataset.archiveMonth}`);
+      if (panel) panel.hidden = !selected;
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectMonth(tab));
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      let nextIndex = index;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+      selectMonth(tabs[nextIndex]);
+      tabs[nextIndex].focus();
+    });
+  });
 }
 
 function bindManualUpdate() {
