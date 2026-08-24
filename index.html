@@ -3,69 +3,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>蹂듭? ?댁뒪 ?꾩뭅?대툕</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260824-months1">
+  <title>복지 뉴스 아카이브</title>
+  <link rel="stylesheet" href="assets/style.css?v=20260824-months2">
 </head>
 <body>
   <header class="site-header">
     <div>
       <p class="eyebrow">Gwangjin Welfare News Archive</p>
-      <h1>蹂듭? ?댁뒪 ?꾩뭅?대툕</h1>
-      <p class="lead">?꾨궇 蹂대룄??蹂듭? 愿???댁뒪瑜??좎쭨蹂꾨줈 紐⑥븘 蹂닿퀬, ?꾩쟻 湲곗궗?먯꽌 ?꾩슂??二쇱젣瑜?寃?됲빀?덈떎.</p>
+      <h1>복지 뉴스 아카이브</h1>
+      <p class="lead">전날 보도된 복지 관련 뉴스를 날짜별로 모아 보고, 누적 기사에서 필요한 주제를 검색합니다.</p>
     </div>
   </header>
 
   <main class="layout">
     <section class="intro" aria-labelledby="refresh-title">
-      <h2 id="refresh-title">理쒖떊 ?곹깭 ?뺤씤</h2>
-      <p>留ㅼ씪 ?ㅼ쟾 8?쒖뿉 RSS 湲곕컲 ?먮룞 ?섏쭛 寃곌낵媛 ??λ맗?덈떎. ?먮룞 ?섏쭛?????먭굅??硫곗튌 ?볦낀???뚮뒗 吏곸젒 ?ㅽ뻾?섎㈃ ??λ릺吏 ?딆? ?좎쭨瑜??댁젣源뚯? ?쒖꽌?濡?梨꾩썎?덈떎.</p>
+      <h2 id="refresh-title">최신 상태 확인</h2>
+      <p>매일 오전 8시에 RSS 기반 자동 수집 결과가 저장됩니다. 자동 수집이 안 됐거나 며칠 놓쳤을 때는 직접 실행하면 저장되지 않은 날짜를 어제까지 순서대로 채웁니다.</p>
       <div class="button-row">
-        <button class="action-button" type="button" data-trigger-update>諛由??먮즺 ?섏쭛 ?ㅽ뻾</button>
+        <button class="action-button" type="button" data-trigger-update>밀린 자료 수집 실행</button>
       </div>
-      <p class="helper-text" data-trigger-message>?섏쭛 ?ㅽ뻾 ??蹂댄넻 1~3遺????덈줈怨좎묠?섎㈃ ???좎쭨媛 蹂댁엯?덈떎.</p>
+      <p class="helper-text" data-trigger-message>수집 실행 후 보통 1~3분 뒤 새로고침하면 새 날짜가 보입니다.</p>
     </section>
 
     <section class="intro" aria-labelledby="date-search-title">
-      <h2 id="date-search-title">?좎쭨濡?諛붾줈 李얘린</h2>
-      <p>?щ젰?먯꽌 ?먰븯???좎쭨瑜??좏깮?섎㈃ ?대떦 ?좎쭨 ?꾩뭅?대툕濡?諛붾줈 ?대룞?⑸땲??</p>
+      <h2 id="date-search-title">날짜로 바로 찾기</h2>
+      <p>달력에서 원하는 날짜를 선택하면 해당 날짜 아카이브로 바로 이동합니다.</p>
       <div class="search-row calendar-row">
-        <label class="field-label" for="date-search">?좎쭨</label>
+        <label class="field-label" for="date-search">날짜</label>
         <div class="calendar-field">
-          <input id="date-search" class="text-input" type="text" inputmode="none" placeholder="?좎쭨 ?좏깮" readonly data-date-search>
-          <button class="calendar-toggle" type="button" aria-label="?щ젰 ?닿린" data-calendar-toggle>??/button>
+          <input id="date-search" class="text-input" type="text" inputmode="none" placeholder="날짜 선택" readonly data-date-search>
+          <button class="calendar-toggle" type="button" aria-label="달력 열기" data-calendar-toggle>▾</button>
           <div class="calendar-popover" hidden data-calendar></div>
         </div>
-        <button class="action-button" type="button" data-date-button>?대룞</button>
+        <button class="action-button" type="button" data-date-button>이동</button>
       </div>
-      <p class="helper-text" data-date-message>?щ젰?먯꽌 ?좎쭨瑜??좏깮??二쇱꽭??</p>
+      <p class="helper-text" data-date-message>달력에서 날짜를 선택해 주세요.</p>
     </section>
 
     <section class="intro" aria-labelledby="keyword-search-title">
-      <h2 id="keyword-search-title">湲곗궗 寃??/h2>
-      <p>?꾩쟻??湲곗궗 ?쒕ぉ, ?붿빟, ?ㅻТ ?쒖궗?먯뿉??寃?됲빀?덈떎.</p>
+      <h2 id="keyword-search-title">기사 검색</h2>
+      <p>누적된 기사 제목, 요약, 실무 시사점에서 검색합니다.</p>
       <div class="search-row single">
-        <label class="field-label" for="keyword-search">寃?됱뼱</label>
-        <input id="keyword-search" class="text-input" type="search" placeholder="?? 湲곗큹?앺솢?섍툒, ?μ븷?? 湲닿툒蹂듭?" data-keyword-search>
+        <label class="field-label" for="keyword-search">검색어</label>
+        <input id="keyword-search" class="text-input" type="search" placeholder="예: 기초생활수급, 장애인, 긴급복지" data-keyword-search>
       </div>
-      <p class="helper-text" data-result-count>寃?됱뼱瑜??낅젰?섎㈃ ?꾩쟻??湲곗궗 以묒뿉??李얠븘?쒕┰?덈떎.</p>
+      <p class="helper-text" data-result-count>검색어를 입력하면 누적된 기사 중에서 찾아드립니다.</p>
       <div class="search-results" data-search-results></div>
     </section>
 
     <section class="intro" aria-labelledby="latest-title">
-      <h2 id="latest-title">?좎쭨蹂?蹂닿린</h2>
-      <p>?좎쭨瑜??좏깮?섎㈃ ?대떦??湲곗??쇰줈 ?섏쭛??蹂듭? ?꾨컲, ?쒖슱??蹂듭?, 愿묒쭊援?蹂듭? ?댁뒪瑜?蹂????덉뒿?덈떎.</p>
+      <h2 id="latest-title">날짜별 보기</h2>
+      <p>날짜를 선택하면 해당일 기준으로 수집한 복지 전반, 서울시 복지, 광진구 복지 뉴스를 볼 수 있습니다.</p>
     </section>
 
-    <section class="archive-list" aria-label="?댁뒪 ?꾩뭅?대툕 ?좎쭨 紐⑸줉" data-archive-list></section>
+    <section class="archive-list" aria-label="뉴스 아카이브 날짜 목록" data-archive-list></section>
   </main>
-  <script src="assets/app.js?v=20260824-months1"></script>
+  <script src="assets/app.js?v=20260824-months2"></script>
   <script>
     (() => {
       const button = document.querySelector("[data-trigger-update]");
       if (!button) return;
       const observer = new MutationObserver(() => {
-        if (button.textContent.trim() === "?섏쭛 ?붿껌 ?꾨즺") {
-          button.textContent = "?ㅻ뒛 ?먮즺 ?섏쭛 ?ㅽ뻾";
+        if (button.textContent.trim() === "수집 요청 완료") {
+          button.textContent = "오늘 자료 수집 실행";
         }
       });
       observer.observe(button, { childList: true, characterData: true, subtree: true });
