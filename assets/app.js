@@ -1,5 +1,11 @@
 const archiveEntries = [
   {
+    date: "2026-11-03",
+    label: "2026년 11월 3일",
+    href: "posts/2026-11-03.html",
+    summary: "복지 전반 5건, 서울시 4건, 광진구 확인된 뉴스 없음"
+  },
+  {
     date: "2026-11-02",
     label: "2026년 11월 2일",
     href: "posts/2026-11-02.html",
