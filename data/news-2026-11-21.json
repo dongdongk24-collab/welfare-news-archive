@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-21",
+  "title": "2026년 11월 21일 복지 뉴스",
+  "generatedAt": "2026-11-22T11:46:44+09:00",
+  "collectionMode": "rss-no-ai",
+  "sourceCoverage": [
+    {
+      "name": "웰페어뉴스",
+      "url": "https://www.welfarenews.net/rss/allArticle.xml",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "복지타임즈",
+      "url": "https://www.bokjitimes.com/rss/allArticle.xml",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "에이블뉴스",
+      "url": "https://www.ablenews.co.kr/rss/allArticle.xml",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "경향신문 사회",
+      "url": "https://www.khan.co.kr/rss/rssdata/society_news.xml",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "경향신문 오피니언",
+      "url": "https://www.khan.co.kr/rss/rssdata/opinion_news.xml",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "보건복지부 보도자료",
+      "url": "https://www.mohw.go.kr/rss/board.es?mid=a10503000000&bid=0027&info",
+      "status": "ok",
+      "feedItems": 30
+    },
+    {
+      "name": "대한민국 정책브리핑 보도자료",
+      "url": "https://www.korea.kr/rss/pressrelease.xml",
+      "status": "error",
+      "feedItems": 0
+    },
+    {
+      "name": "서울시 보도자료",
+      "url": "https://seoulboard.seoul.go.kr/rss/RSSGenerator?bbsNo=158",
+      "status": "ok",
+      "feedItems": 50
+    },
+    {
+      "name": "내 손안에 서울 복지 RSS",
+      "url": "https://mediahub.seoul.go.kr/news/rss/07",
+      "status": "ok",
+      "feedItems": 20
+    },
+    {
+      "name": "광진구 보도자료",
+      "url": "https://www.gwangjin.go.kr/portal/bbs/B0000002/rssService.do?viewType=CONTBODY&bbsId=B02",
+      "status": "ok",
+      "feedItems": 10
+    }
+  ],
+  "sections": [
+    {
+      "name": "복지 전반에 관련된 주요 뉴스",
+      "items": [],
+      "note": "2026-11-21 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    },
+    {
+      "name": "서울시 복지 정책 및 복지 현장 관련 뉴스",
+      "items": [],
+      "note": "2026-11-21 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    },
+    {
+      "name": "광진구 지역 복지 관련 뉴스",
+      "items": [],
+      "note": "2026-11-21 00:00~23:59(KST) 기준, RSS 수집 범위에서 확인된 관련 뉴스가 없습니다."
+    }
+  ],
+  "excluded": [
+    "대한민국 정책브리핑 보도자료 수집 실패: HTTP Error 404: Not Found",
+    "복지 키워드 제외: 홍대입구역서 버스가 인도로 돌진···6명 부상",
+    "복지 키워드 제외: [속보]코레일 “22일 첫차부터 경부선 일반열차 운행 정상화”",
+    "복지 키워드 제외: 공기총 사격 연습 중 날아간 총알에 60대 행인 숨져",
+    "복지 키워드 제외: 제34회 전태일문학상·제21회 전태일청소년문학상·제2회 전태일작가상 시상식 열려",
+    "복지 키워드 제외: 열차 후미 번쩍번쩍 두차례 섬광, 10초 안 지나 선로 이탈···경부선 화물열차 탈선 순간 CCTV 포착",
+    "복지 키워드 제외: 수험생연대 “수능 부정 방지책 실효성 없고 불안 키워···최교진 장관 사퇴”",
+    "복지 키워드 제외: 경부선 화물열차 탈선 여파…코레일, 임시열차 15편 투입",
+    "복지 키워드 제외: 경부선 화물열차 탈선에 일반열차 막혀···“천안∼대전 구간 버스로 연계 수송”",
+    "복지 키워드 제외: “저 부표, 실종된 해광호 것 아니야?”···해경, 어선 추정 위치 300m 밖서 ‘단서’ 발견",
+    "복지 키워드 제외: 토요일 오전 전국 곳곳 영하권 추위…제주 산지 최대 7㎝ 눈",
+    "복지 키워드 제외: 경부선 화물열차 탈선에 일반열차 운행 중지…“수험생 유의”",
+    "복지 키워드 제외: 정동길의 ‘마지막’ 단풍 [정동길 옆 사진관]",
+    "복지 키워드 제외: [뉴스분석]수능 끝났지만 ‘AI와의 싸움’은 안 끝났다…대입·진상규명·시험개편까지 ‘첩첩산중’",
+    "복지 키워드 제외: “한덕수, 계엄 전엔 절차 수호자, 직후엔 내란 가담자?”…친위 쿠데타에 악용된 국무회의 역사 [법정 417호, 내란의 기록]"
+  ]
+}
